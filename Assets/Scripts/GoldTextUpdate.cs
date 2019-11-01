@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameManager : MonoBehaviour
+public class GoldTextUpdate : MonoBehaviour
 {
-    public TextMeshProUGUI deathCountText;
-    public static int deathCount;
-    
+    public Player player;
+    public TextMeshProUGUI goldText;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        player.GoldUpdateEvent += UpdateGold;
     }
 
     // Update is called once per frame
@@ -20,10 +20,8 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public static void UpdateDeathCount()
+    public void UpdateGold(int addedGold, int totalGold)
     {
-        deathCount++;
-
-        
+        goldText.text = "Gold: " + totalGold.ToString();
     }
 }

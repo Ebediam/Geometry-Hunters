@@ -123,8 +123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e47e91e17c055045882b104f7329c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 2
+  hitPoints: 20
+  enemyType: {fileID: 11400000, guid: c7baef0f787212e46a3e356538166212, type: 2}
   remainingHitPoints: 0
+  goldValue: 1
+  damage: 10
   explosionFX: {fileID: 7702445403039387059}
   col: {fileID: 1916044516551594158}
   rb: {fileID: 1916044516551594159}

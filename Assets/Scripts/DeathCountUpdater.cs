@@ -6,6 +6,7 @@ using TMPro;
 public class DeathCountUpdater : MonoBehaviour
 {
     public TextMeshProUGUI deathText;
+    public TextMeshProUGUI goldText;
 
     public List<EnemySpawner> enemySpawners;
 
@@ -25,7 +26,7 @@ public class DeathCountUpdater : MonoBehaviour
         
     }
 
-    public void UpdateDeathText(int deathCount)
+    public void UpdateDeathText(int deathCount, int goldAmount)
     {
         deathText.text = "Kills: " + deathCount.ToString();
     }

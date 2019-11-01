@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
-
-
-
     public int hitPoints;
+    public EnemyType enemyType;
+
     public int remainingHitPoints;
+
+    public int goldValue;
+    public int damage;
     public ParticleSystem explosionFX;
 
     public Collider col;
@@ -29,17 +30,23 @@ public class Enemy : MonoBehaviour
     
 
     // Start is called before the first frame update
-    void Start()
+
+
+
+    public void InitializeEnemyStats()
     {
-        remainingHitPoints = hitPoints;
-        
-
-
+        hitPoints = enemyType.health;
+        goldValue = enemyType.goldValue;
+        damage = enemyType.damage;
+        speed = enemyType.speed;
         meshRenderer.material = new Material(mat);
         mat = meshRenderer.material;
+        remainingHitPoints = hitPoints;
         mat.SetFloat("_healthRemaining", remainingHitPoints / hitPoints);
+        mat.SetColor("_initialColor", enemyType.initialColor);
+        mat.SetColor("_endColor", enemyType.endColor);
+        
     }
-
 
     public void OnCollisionEnter(Collision collision)
     {
@@ -94,10 +101,11 @@ public class Enemy : MonoBehaviour
         isDead = true;
         deadEnemies++;
 
-        spawner.EnemyDeathEvent(deadEnemies);
+        spawner.EnemyDeathEvent(deadEnemies, goldValue);
         Destroy(gameObject);
         
     }
 
 
 }
+    

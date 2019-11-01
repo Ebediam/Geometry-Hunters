@@ -26,6 +26,7 @@ public class Start : MonoBehaviour
     public void StartGame()
     {
         StartEvent();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+       
     }
 }
