@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Remover : MonoBehaviour
 {
+    public delegate void EnemyThroughDelegate();
+    public EnemyThroughDelegate EnemyThroughEvent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +22,13 @@ public class Remover : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<Enemy>())
-        {
-            other.gameObject.GetComponent<Enemy>().Die();
+        {            
+            if (!other.gameObject.GetComponent<Enemy>().isDead)
+            {
+                other.gameObject.GetComponent<Enemy>().spawner.spawnAllowed = true;
+                EnemyThroughEvent();
+
+            }
         }
 
         Destroy(other.gameObject);

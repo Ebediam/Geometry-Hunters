@@ -6,11 +6,18 @@ public class EnemySpawner : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    public delegate void EnemyDeathDelegate(int deathCount);
+    public EnemyDeathDelegate EnemyDeathEvent;
+
+    public Start startBlock;
+
+
     public GameObject enemyPrefab;
     public Enemy enemy;
     public bool spawnAllowed = true;
     public float xRange;
     public float yRange;
+    public float delayBeforeStart;
 
     float xOffset;
     float yOffset;
@@ -19,12 +26,26 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
+        startBlock.StartEvent += Activate;
         
+    }
+
+    public void Activate()
+    {
+        Invoke("SetActive", delayBeforeStart);
+    }
+
+    public void SetActive()
+    {
+        active = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
+
         if (!active)
         {
             return;
@@ -64,4 +85,6 @@ public class EnemySpawner : MonoBehaviour
     {
         transform.position -= (transform.right * xOffset + transform.up * yOffset);
     }
+
+
 }

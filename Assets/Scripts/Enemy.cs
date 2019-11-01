@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+
+
+
+
     public int hitPoints;
     public int remainingHitPoints;
     public ParticleSystem explosionFX;
@@ -19,6 +23,8 @@ public class Enemy : MonoBehaviour
     public MeshRenderer meshRenderer;
 
     public bool isDead = false;
+
+    public static int deadEnemies;
 
     
 
@@ -79,14 +85,19 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        explosionFX.Play();
+        Instantiate(explosionFX, transform.position, transform.rotation).Play();
         rb.useGravity = true;
         rb.isKinematic = false;
         spawner.enemy = null;
         spawner.spawnAllowed = true;
         gameObject.layer = 10;
         isDead = true;
+        deadEnemies++;
 
-        GameManager.UpdateDeathCount();
+        spawner.EnemyDeathEvent(deadEnemies);
+        Destroy(gameObject);
+        
     }
+
+
 }

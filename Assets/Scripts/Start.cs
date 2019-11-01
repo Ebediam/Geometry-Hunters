@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Start : MonoBehaviour
 {
-    public List<EnemySpawner> enemySpawners;
+
+    public delegate void StartDelegate();
+
+    public StartDelegate StartEvent;
+
     // Start is called before the first frame update
 
 
@@ -16,11 +20,12 @@ public class Start : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        foreach(EnemySpawner spawner in enemySpawners)
-        {
-            spawner.active = true;
-        }
+        StartGame();
+    }
 
+    public void StartGame()
+    {
+        StartEvent();
         Destroy(gameObject);
     }
 }
