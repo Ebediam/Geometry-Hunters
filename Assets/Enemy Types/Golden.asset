@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b85738c5869a54947a7472046b24c2d9, type: 3}
-  m_Name: Basic
+  m_Name: Golden
   m_EditorClassIdentifier: 
-  enemyName: Basic
-  size: 0.75
-  health: 20
-  damage: 10
-  goldValue: 1
-  speed: 3
-  initialColor: {r: 0.006026864, g: 1, b: 0, a: 0}
+  enemyName: Golden
+  size: 0.5
+  health: 1
+  damage: 0
+  goldValue: 20
+  speed: 10
+  initialColor: {r: 1, g: 0.889333, b: 0, a: 0}
   endColor: {r: 1, g: 0, b: 0, a: 0}

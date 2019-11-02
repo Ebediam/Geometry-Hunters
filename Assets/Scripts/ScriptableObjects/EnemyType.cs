@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyType : ScriptableObject
 {
     public string enemyName;
+    public float size;
     public int health;
     public int damage;
     public int goldValue;

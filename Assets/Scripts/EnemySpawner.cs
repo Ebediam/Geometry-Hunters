@@ -5,17 +5,23 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     // Start is called before the first frame update
+    public SpawnerType spawnerType;
+
+    public WaveManager waveManager;
 
     public delegate void EnemyDeathDelegate(int deathCount, int goldAmount);
     public EnemyDeathDelegate EnemyDeathEvent;
 
-    public Start startBlock;
+    public delegate void EnemyLimitDelegate();
+    public EnemyLimitDelegate EnemyLimitEvent;
 
-    public EnemyType enemySpawned;
+    public StartBox startBlock;
 
     public int spawnNumber;
     int spawnedEnemiesCounter = 0;
+    int remainingEnemies;
 
+    public EnemyType nextEnemyType;
     public GameObject enemyPrefab;
     public Enemy enemy;
     public bool spawnAllowed = true;
@@ -30,18 +36,20 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        startBlock.StartEvent += Activate;
-        
+        startBlock.StartEvent += Activate;        
     }
 
     public void Activate()
     {
         Invoke("SetActive", delayBeforeStart);
+        spawnedEnemiesCounter = 0;
+        remainingEnemies = spawnNumber;
     }
 
     public void SetActive()
     {
         active = true;
+        spawnAllowed = true;
     }
 
     // Update is called once per frame
@@ -67,19 +75,32 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
+    public void SpawnTimer()
+    {
+        spawnAllowed = true;
+    }
+
     public void SpawnEnemy()
     {
+        CancelInvoke("SpawnTimer");
+        
         spawnedEnemiesCounter++;
+        nextEnemyType = ChooseEnemy();
+
         enemy = Instantiate(enemyPrefab, transform.position, transform.rotation).GetComponent<Enemy>();
         enemy.spawner = this;
-        enemy.enemyType = enemySpawned;
+        enemy.enemyType = nextEnemyType;
         enemy.InitializeEnemyStats();
         
         enemy.rb.velocity = Vector3.forward * enemy.speed;
+
+        Invoke("SpawnTimer", spawnerType.delayBetweenEnemies+Random.Range(-spawnerType.delayRange, spawnerType.delayRange));
         if(spawnedEnemiesCounter >= spawnNumber)
         {
             StopSpawner();
         }
+
+        
     }
 
     public void MoveSpawner()
@@ -97,7 +118,46 @@ public class EnemySpawner : MonoBehaviour
 
     public void StopSpawner()
     {
+
         active = false;
         spawnAllowed = true;
+        CancelInvoke("SpawnTimer");
+    }
+
+    public EnemyType ChooseEnemy()
+    {
+        EnemyType enemyType = null;
+        float randomNumber = Random.Range(0f, 1f);
+
+
+        for(int i=0; i<spawnerType.availableEnemies.Count; i++)
+        {
+            randomNumber -= spawnerType.enemyChance[i];
+            if(randomNumber <= 0)
+            {
+                enemyType = spawnerType.availableEnemies[i];
+                break;
+            }
+        }
+
+
+        return enemyType;
+    }
+
+    public void EnemyDeath(int deathCount, int goldAmount)
+    {
+        EnemyDeathEvent(deathCount, goldAmount);
+        DespawnedEnemy();
+
+    }
+
+    public void DespawnedEnemy()
+    {
+        remainingEnemies--;
+
+        if (remainingEnemies <= 0)
+        {
+            EnemyLimitEvent();
+        }
     }
 }

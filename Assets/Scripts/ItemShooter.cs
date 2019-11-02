@@ -10,7 +10,10 @@ public class ItemShooter : MonoBehaviour
     public float bulletSpeed;
     public float fireRate;
     public float shotDelay;
-    
+
+    public AudioSource shotSFX;
+
+    public Player player;
 
     GameObject bullet;
 
@@ -38,8 +41,19 @@ public class ItemShooter : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                InvokeRepeating("Shoot", shotDelay, fireRate);
-                isFiring = true;
+                if (!player.isDead)
+                {
+
+                    InvokeRepeating("Shoot", shotDelay, fireRate);
+                    isFiring = true;
+                }
+                else
+                {
+                    player.RestartGame();
+                }
+
+
+
             }
         }      
 
@@ -50,6 +64,7 @@ public class ItemShooter : MonoBehaviour
     {
         bullet = Instantiate(bulletPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
         bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward*bulletSpeed, ForceMode.Impulse);
+        shotSFX.Play();
     }
 
     

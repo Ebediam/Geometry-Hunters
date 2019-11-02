@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b85738c5869a54947a7472046b24c2d9, type: 3}
-  m_Name: Basic
+  m_Script: {fileID: 11500000, guid: 9d85b46e3f941c64cbacb9be93ba2e0b, type: 3}
+  m_Name: Bonus
   m_EditorClassIdentifier: 
-  enemyName: Basic
-  size: 0.75
-  health: 20
-  damage: 10
-  goldValue: 1
-  speed: 3
-  initialColor: {r: 0.006026864, g: 1, b: 0, a: 0}
-  endColor: {r: 1, g: 0, b: 0, a: 0}
+  spawnerID: 
+  availableEnemies:
+  - {fileID: 11400000, guid: 0b83092f28a121445b20ccfdf792ce2f, type: 2}
+  enemyChance:
+  - 1
+  spawnNumber: 20
+  delayBetweenEnemies: 0.25

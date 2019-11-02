@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     public int hitPoints;
     public EnemyType enemyType;
 
+    public AudioSource deathSFX;
+
     public int remainingHitPoints;
 
     public int goldValue;
@@ -26,17 +28,23 @@ public class Enemy : MonoBehaviour
     public bool isDead = false;
 
     public static int deadEnemies;
+    public bool setToDestroy;
 
-    
+
 
     // Start is called before the first frame update
 
 
-
     public void InitializeEnemyStats()
     {
+        spawner.waveManager.player.DeathEvent += OnGameOver;
+        spawner.waveManager.player.RestartEvent += OnRestart;
+
         hitPoints = enemyType.health;
         goldValue = enemyType.goldValue;
+
+        transform.localScale *= enemyType.size;
+        rb.mass *= enemyType.size;
         damage = enemyType.damage;
         speed = enemyType.speed;
         meshRenderer.material = new Material(mat);
@@ -70,6 +78,18 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void OnGameOver()
+    {
+        Debug.Log("OnGameOver in enemy");
+        spawner.waveManager.player.DeathEvent -= OnGameOver;
+        speed = 0f;        
+    }
+    
+    public void OnRestart()
+    {
+        spawner.waveManager.player.RestartEvent -= OnRestart;
+        setToDestroy = true;
+    }
 
     // Update is called once per frame
     void Update()
@@ -81,28 +101,36 @@ public class Enemy : MonoBehaviour
 
         transform.position += transform.forward * speed * Time.deltaTime;
 
-
+        if (setToDestroy)
+        {
+            Destroy(gameObject);
+        }
     }
 
 
     public void Die()
     {
+
         if (isDead)
         {
             return;
         }
 
+        spawner.waveManager.player.DeathEvent -= OnGameOver;
+        spawner.waveManager.player.RestartEvent -= OnRestart;
+
+
+        deathSFX.Play();
         Instantiate(explosionFX, transform.position, transform.rotation).Play();
+
         rb.useGravity = true;
         rb.isKinematic = false;
-        spawner.enemy = null;
-        spawner.spawnAllowed = true;
         gameObject.layer = 10;
         isDead = true;
         deadEnemies++;
 
-        spawner.EnemyDeathEvent(deadEnemies, goldValue);
-        Destroy(gameObject);
+        spawner.EnemyDeath(deadEnemies, goldValue);
+        Destroy(gameObject, 0.25f);
         
     }
 

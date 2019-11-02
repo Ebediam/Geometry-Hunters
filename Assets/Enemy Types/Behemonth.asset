@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Behemonth
   m_EditorClassIdentifier: 
   enemyName: Behemonth
+  size: 2
   health: 100
   damage: 50
   goldValue: 5

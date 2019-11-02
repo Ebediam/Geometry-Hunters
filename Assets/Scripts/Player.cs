@@ -10,10 +10,17 @@ public class Player : MonoBehaviour
 
     public delegate void GoldDelegate(int addedGold, int totalGold);
     public GoldDelegate GoldUpdateEvent;
-    
+
+
+    public delegate void DeathDelegate();
+    public DeathDelegate DeathEvent;
+
+    public delegate void RestartDelegate();
+    public RestartDelegate RestartEvent;
 
     public int goldAmount = 0;
 
+    public bool isDead;
     
 
     public int maxHealth;
@@ -28,12 +35,27 @@ public class Player : MonoBehaviour
         foreach (Remover remover in removers)
         {
             remover.EnemyThroughEvent += TakeDamage;
+            remover.player = this;
         }
 
         foreach(EnemySpawner spawner in enemySpawners)
         {
             spawner.EnemyDeathEvent += UpdateGold;
         }
+    }
+
+    public void ResetPlayer()
+    {
+        isDead = false;
+        TakeDamage(health - maxHealth);
+        UpdateGold(0, -goldAmount);
+    }
+
+    public void RestartGame()
+    {
+        RestartEvent?.Invoke();
+        ResetPlayer();
+        
     }
 
     // Update is called once per frame
@@ -51,6 +73,11 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isDead)
+        {
+            return;
+        }
+
         health -= damage;
         DamageEvent(maxHealth, health);
         if(health <= 0)
@@ -61,6 +88,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        
+        isDead = true;
+        DeathEvent?.Invoke();
     }
 }

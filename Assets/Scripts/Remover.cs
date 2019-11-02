@@ -6,11 +6,12 @@ public class Remover : MonoBehaviour
 {
     public delegate void EnemyThroughDelegate(int damage);
     public EnemyThroughDelegate EnemyThroughEvent;
+    public Player player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -19,19 +20,29 @@ public class Remover : MonoBehaviour
         
     }
 
+
+
     private void OnTriggerEnter(Collider other)
     {
+        if (player.isDead)
+        {
+            return;
+        }
+     
+
         if (other.gameObject.GetComponent<Enemy>())
         {
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            if (!enemy.isDead)
-            {
-                enemy.spawner.spawnAllowed = true;
-                EnemyThroughEvent(enemy.damage);
+            enemy.spawner.spawnAllowed = true;
+            EnemyThroughEvent(enemy.damage);
 
-            }
+            enemy.spawner.DespawnedEnemy();            
+            enemy = null;
         }
 
-        Destroy(other.gameObject);
+
+       Destroy(other.gameObject);
+
+
     }
 }
