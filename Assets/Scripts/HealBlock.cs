@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class HealBlock : MonoBehaviour
 {
     public WaveManager waveManager;
     public BlockSettings myBlock;
     public Player player;
+
+
+    public TextMeshPro goldText; 
 
     public float delayToReactivate;
 
@@ -42,7 +46,15 @@ public class HealBlock : MonoBehaviour
 
     public void DelayedReactivateBox()
     {
+        int missingHealth = player.maxHealth - player.health;
+        if (missingHealth == 0)
+        {
+            return;
+        }
         gameObject.SetActive(true);
+
+        goldText.text = missingHealth.ToString() + " gold";
+
     }
 
     // Update is called once per frame

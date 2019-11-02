@@ -11,21 +11,19 @@ public class BlockSettings : MonoBehaviour
     public TextBlockType blockType;
     public Material mat;
     public TextMeshPro text;
+    
     public MeshRenderer mesh;
     // Start is called before the first frame update
     void Start()
     {
-
         
         Material material = new Material(mat);
         mesh.material = material;
         text.text = blockType.text;
         text.fontSize = blockType.textSize;
-
-
+        
         text.color = blockType.textColor;
-
-
+        
         material.SetColor("_boxColor", blockType.blockColor);
 
     }

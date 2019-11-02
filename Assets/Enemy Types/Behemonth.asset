@@ -16,7 +16,7 @@ MonoBehaviour:
   size: 2
   health: 100
   damage: 50
-  goldValue: 5
+  goldValue: 7
   speed: 1
   initialColor: {r: 0, g: 0.284652, b: 1, a: 0}
   endColor: {r: 1, g: 0.05809614, b: 0, a: 0}

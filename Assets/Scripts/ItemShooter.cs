@@ -7,23 +7,41 @@ public class ItemShooter : MonoBehaviour
     public Transform spawnPoint;
     public GameObject bulletPrefab;
 
-    public float bulletSpeed;
-    public float fireRate;
-    public float shotDelay;
+    public BulletType defaultBullet;
+
+    public BulletType mainBullet;
+    
+    public BulletType secondaryBullet;
 
     public AudioSource shotSFX;
+    public AudioSource secondaryShotSFX;
+
+    public MeshRenderer mesh;
+
+    public float maxDamageMultiplier = 5f;
+
+    public float bulletSpeed;
+
+    public float cooldownReductor = 1f;
+    public float bulletDamageMultiplier = 1f;
 
     public Player player;
 
-    GameObject bullet;
+    Bullet bullet;
 
     bool isFiring = false;
+    bool isSecondaryFiring = false;
+
+    public bool secondaryShooting = false;
+
+    public Material gunTipMaterial;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        shotSFX.clip = mainBullet.shotSFX;
+        secondaryShotSFX.clip = secondaryBullet.shotSFX;        
     }
 
     // Update is called once per frame
@@ -33,8 +51,7 @@ public class ItemShooter : MonoBehaviour
         {
             if (Input.GetMouseButtonUp(0))
             {
-                CancelInvoke("Shoot");
-                isFiring = false;
+                Invoke("MainCooldown", mainBullet.cooldown);
             }
         }
         else
@@ -43,8 +60,7 @@ public class ItemShooter : MonoBehaviour
             {
                 if (!player.isDead)
                 {
-
-                    InvokeRepeating("Shoot", shotDelay, fireRate);
+                    Shoot(mainBullet, true);
                     isFiring = true;
                 }
                 else
@@ -55,16 +71,83 @@ public class ItemShooter : MonoBehaviour
 
 
             }
-        }      
+        }
+
+        if (!secondaryShooting)
+        {
+            return;
+        }
+
+        if (isSecondaryFiring)
+        {
+            if (Input.GetMouseButtonUp(1))
+            {
+
+                Invoke("SecondaryCooldown", secondaryBullet.cooldown);
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (!player.isDead)
+                {
+                    Shoot(secondaryBullet, false);
+                    gunTipMaterial.SetFloat("_isCharged", 0f);
+                    isSecondaryFiring = true;
+                }
+            }
+        }
 
 
     }
 
-    void Shoot()
+
+    public void MainCooldown()
     {
-        bullet = Instantiate(bulletPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
-        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward*bulletSpeed, ForceMode.Impulse);
-        shotSFX.Play();
+        CancelInvoke("MainCooldown");
+        isFiring = false;
+    }
+
+    public void SecondaryCooldown()
+    {
+        CancelInvoke("SecondaryCooldown");
+        isSecondaryFiring = false;
+        gunTipMaterial.SetFloat("_isCharged", 1f);
+    }
+
+    void Shoot(BulletType bulletType, bool main)
+    {
+        bullet = Instantiate(bulletPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation).GetComponent<Bullet>();
+        bullet.bulletType = bulletType;
+        
+        bullet.rb.AddForce(bullet.transform.forward*bulletSpeed, ForceMode.Impulse);
+        bullet.damageMultiplier = bulletDamageMultiplier;
+
+        if (main)
+        {
+            shotSFX.Play();
+        }
+        else
+        {
+            secondaryShotSFX.Play();
+        }
+
+    }
+
+
+    public void UpdateGunColor()
+    {
+        mesh.material.SetFloat("_PowerLevel", bulletDamageMultiplier / maxDamageMultiplier);
+    }
+      
+    public void ResetGun()
+    {
+        bulletDamageMultiplier = 1f;
+        UpdateGunColor();
+        cooldownReductor = 1f;
+        mainBullet = defaultBullet;
+        secondaryBullet = null;
     }
 
     

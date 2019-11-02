@@ -53,6 +53,7 @@ public class WaveManager : MonoBehaviour
         for(int i=0; i < spawners.Count; i++)
         {
             spawners[i].spawnerType = waves[wavesCompleted].enemySpawnersTypes[i]; 
+            
         }
 
         spawnerCounter = waves[wavesCompleted].numberOfSpawners;

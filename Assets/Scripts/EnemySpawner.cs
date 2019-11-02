@@ -43,6 +43,7 @@ public class EnemySpawner : MonoBehaviour
     {
         Invoke("SetActive", delayBeforeStart);
         spawnedEnemiesCounter = 0;
+        spawnNumber = spawnerType.spawnNumber;
         remainingEnemies = spawnNumber;
     }
 

@@ -22,9 +22,12 @@ public class Player : MonoBehaviour
 
     public bool isDead;
     
+    
 
     public int maxHealth;
     public int health;
+
+    public ItemShooter gun;
 
     public List<Remover> removers;
     public List<EnemySpawner> enemySpawners;
@@ -49,6 +52,8 @@ public class Player : MonoBehaviour
         isDead = false;
         TakeDamage(health - maxHealth);
         UpdateGold(0, -goldAmount);
+        gun.ResetGun();
+        
     }
 
     public void RestartGame()
@@ -66,9 +71,8 @@ public class Player : MonoBehaviour
 
     public void UpdateGold(int deathCount, int gold)
     {
-        Debug.Log("Update gold");
         goldAmount += gold;
-        GoldUpdateEvent(gold, goldAmount);
+        GoldUpdateEvent?.Invoke(gold, goldAmount);
     }
 
     public void TakeDamage(int damage)
@@ -79,7 +83,7 @@ public class Player : MonoBehaviour
         }
 
         health -= damage;
-        DamageEvent(maxHealth, health);
+        DamageEvent?.Invoke(maxHealth, health);
         if(health <= 0)
         {
             Die();

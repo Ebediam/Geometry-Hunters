@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb5f13ec72944b4fb5d3f1dfebfd996, type: 3}
+  m_Name: Boss Wave
+  m_EditorClassIdentifier: 
+  waveID: Boss Wave
+  numberOfSpawners: 2
+  enemySpawnersTypes:
+  - {fileID: 11400000, guid: 5495a82cce2b02145ab9c05318a919e4, type: 2}
+  - {fileID: 11400000, guid: bc3920761ec251a4498be313b56db593, type: 2}

@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
 
     public AudioSource deathSFX;
 
-    public int remainingHitPoints;
+    public float remainingHitPoints;
 
     public int goldValue;
     public int damage;
@@ -67,7 +67,18 @@ public class Enemy : MonoBehaviour
         
         if (collision.collider.gameObject.GetComponentInChildren<Bullet>())
         {
-            remainingHitPoints -= collision.collider.gameObject.GetComponentInChildren<Bullet>().damage;
+            Bullet bullet = collision.collider.gameObject.GetComponentInChildren<Bullet>();
+            remainingHitPoints -= bullet.damage;
+            
+            if(bullet.bulletType.bulletEffects.Count > 0)
+            {
+                foreach (BulletEffect effect in bullet.bulletType.bulletEffects)
+                {
+                    effect.OnActivation(this);
+                }
+            }
+
+
             mat.SetFloat("_healthRemaining", (remainingHitPoints + 0f) / hitPoints);
 
             if (remainingHitPoints <= 0)

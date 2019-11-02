@@ -20,5 +20,5 @@ MonoBehaviour:
   - 0.5
   - 0.5
   spawnNumber: 15
-  delayBetweenEnemies: 1
+  delayBetweenEnemies: 1.25
   delayRange: 0.2

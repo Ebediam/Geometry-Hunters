@@ -5,11 +5,23 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
-    public int damage;
+    public float damage;
+    public float damageMultiplier = 1f;
+    public TrailRenderer trail;
+    public MeshRenderer mesh;
+    public BulletType bulletType;
+    public Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
         Destroy(gameObject, 2f);
+        damage = bulletType.damage*damageMultiplier;
+        trail.startColor = bulletType.trailColor;
+
+        mesh.material.SetColor("_bulletColor", bulletType.color);
+        trail.material.SetColor("_bulletColor", bulletType.trailColor);
+                     
     }
 
     // Update is called once per frame
@@ -20,6 +32,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+
         Destroy(gameObject);
     }
 

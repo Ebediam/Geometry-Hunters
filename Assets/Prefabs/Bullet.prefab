@@ -124,6 +124,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  trail: {fileID: -2498162796885376026}
+  mesh: {fileID: 5548413627691318389}
+  bulletType: {fileID: 11400000, guid: e12bff2c4d4e5e24cb1fe8ef3cf76034, type: 2}
+  rb: {fileID: 2455416105404627539}
+  audio: {fileID: 0}
 --- !u!96 &-2498162796885376026
 TrailRenderer:
   serializedVersion: 2

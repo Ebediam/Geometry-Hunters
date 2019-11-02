@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcb5f13ec72944b4fb5d3f1dfebfd996, type: 3}
-  m_Name: Wave 2
+  m_Name: Easy Wave 2
   m_EditorClassIdentifier: 
-  waveID: Wave 2
+  waveID: EW2
   numberOfSpawners: 2
   enemySpawnersTypes:
-  - {fileID: 11400000, guid: 9935a22ddfdfe134abbdc31c99bde7d5, type: 2}
-  - {fileID: 11400000, guid: 9935a22ddfdfe134abbdc31c99bde7d5, type: 2}
+  - {fileID: 11400000, guid: be93206d46ce58044bf3308529289dfa, type: 2}
+  - {fileID: 11400000, guid: be93206d46ce58044bf3308529289dfa, type: 2}
