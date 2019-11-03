@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
         health = maxHealth;
         foreach (Remover remover in removers)
         {

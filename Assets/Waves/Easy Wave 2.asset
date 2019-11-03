@@ -15,5 +15,5 @@ MonoBehaviour:
   waveID: EW2
   numberOfSpawners: 2
   enemySpawnersTypes:
-  - {fileID: 11400000, guid: be93206d46ce58044bf3308529289dfa, type: 2}
-  - {fileID: 11400000, guid: be93206d46ce58044bf3308529289dfa, type: 2}
+  - {fileID: 11400000, guid: 074fd54d9a41a31429358f9148d06c36, type: 2}
+  - {fileID: 11400000, guid: 074fd54d9a41a31429358f9148d06c36, type: 2}

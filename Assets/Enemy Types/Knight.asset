@@ -16,7 +16,8 @@ MonoBehaviour:
   size: 1.2
   health: 35
   damage: 15
-  goldValue: 4
+  goldValue: 6
   speed: 2.75
+  isBoss: 0
   initialColor: {r: 0.45990568, g: 0.59692657, b: 0.6132076, a: 1}
   endColor: {r: 1, g: 0, b: 0, a: 1}

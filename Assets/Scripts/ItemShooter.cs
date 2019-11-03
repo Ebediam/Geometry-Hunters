@@ -36,12 +36,16 @@ public class ItemShooter : MonoBehaviour
 
     public Material gunTipMaterial;
 
+    public List<BulletType> bulletTypes;
+
+    public int currentSecondaryPower;
 
     // Start is called before the first frame update
     void Start()
     {
         shotSFX.clip = mainBullet.shotSFX;
-        secondaryShotSFX.clip = secondaryBullet.shotSFX;        
+        gunTipMaterial.SetFloat("_isCharged", 0f);
+
     }
 
     // Update is called once per frame
@@ -51,7 +55,7 @@ public class ItemShooter : MonoBehaviour
         {
             if (Input.GetMouseButtonUp(0))
             {
-                Invoke("MainCooldown", mainBullet.cooldown);
+                Invoke("MainCooldown", mainBullet.cooldown*cooldownReductor);
             }
         }
         else
@@ -83,7 +87,7 @@ public class ItemShooter : MonoBehaviour
             if (Input.GetMouseButtonUp(1))
             {
 
-                Invoke("SecondaryCooldown", secondaryBullet.cooldown);
+                Invoke("SecondaryCooldown", secondaryBullet.cooldown*cooldownReductor);
             }
         }
         else
@@ -131,6 +135,7 @@ public class ItemShooter : MonoBehaviour
         else
         {
             secondaryShotSFX.Play();
+            bullet.bulletEffects[currentSecondaryPower-1].isActive = true;
         }
 
     }
@@ -148,7 +153,18 @@ public class ItemShooter : MonoBehaviour
         cooldownReductor = 1f;
         mainBullet = defaultBullet;
         secondaryBullet = null;
+        secondaryShooting = false;
+        gunTipMaterial.SetFloat("_isCharged", 0f);
     }
 
+    public void UpdateSecundaryBullet(BulletType bulletType, int effectNumber)
+    {
+        secondaryBullet = bulletType;
+        secondaryShooting = true;
+        secondaryShotSFX.clip = secondaryBullet.shotSFX;
+        gunTipMaterial.SetFloat("_isCharged", 1f);
+        currentSecondaryPower = effectNumber;
+        
+    }
     
 }

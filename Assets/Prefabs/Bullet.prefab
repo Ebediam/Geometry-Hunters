@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 2455416105404627539}
   - component: {fileID: 1303742091251935282}
   - component: {fileID: -2498162796885376026}
+  - component: {fileID: 7796422900591887889}
+  - component: {fileID: 6397165989773145000}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -124,11 +126,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  damageMultiplier: 1
   trail: {fileID: -2498162796885376026}
   mesh: {fileID: 5548413627691318389}
   bulletType: {fileID: 11400000, guid: e12bff2c4d4e5e24cb1fe8ef3cf76034, type: 2}
   rb: {fileID: 2455416105404627539}
-  audio: {fileID: 0}
+  bulletEffects:
+  - {fileID: 7796422900591887889}
+  - {fileID: 6397165989773145000}
 --- !u!96 &-2498162796885376026
 TrailRenderer:
   serializedVersion: 2
@@ -225,3 +230,29 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &7796422900591887889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732150396376970626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6bddb6becb8ec4581d1fe58e86e3a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0
+--- !u!114 &6397165989773145000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732150396376970626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c0ab108b56462429226ae84719323b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0

@@ -11,6 +11,7 @@ public class EnemyType : ScriptableObject
     public int damage;
     public int goldValue;
     public float speed;
+    public bool isBoss;
 
     public Color initialColor;
     public Color endColor;

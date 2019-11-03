@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3153e152c0ff2741a905412b50c5e3a, type: 3}
+  m_Name: Confuse
+  m_EditorClassIdentifier: 
+  bulletID: ConfuseRay
+  damage: 0
+  color: {r: 0.8309207, g: 0, b: 1, a: 1}
+  trailColor: {r: 0.8182249, g: 0, b: 1, a: 1}
+  cooldown: 1
+  bulletEffects: []
+  speed: 8
+  shotDelay: 0
+  shotSFX: {fileID: 8300000, guid: 77ef614c413606a42a1eb19eac4a27b8, type: 3}

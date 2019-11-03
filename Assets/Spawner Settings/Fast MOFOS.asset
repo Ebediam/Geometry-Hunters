@@ -17,6 +17,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c7baef0f787212e46a3e356538166212, type: 2}
   enemyChance:
   - 1
-  spawnNumber: 30
-  delayBetweenEnemies: 0.25
+  spawnNumber: 20
+  delayBetweenEnemies: 0.3
   delayRange: 0.1

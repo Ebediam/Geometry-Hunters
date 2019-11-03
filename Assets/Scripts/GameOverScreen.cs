@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameOverScreen : MonoBehaviour
 {
     public Player player;
+    
     // Start is called before the first frame update
     void Start()
     {

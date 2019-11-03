@@ -24,6 +24,7 @@ public class WaveManager : MonoBehaviour
     public List<EnemySpawner> spawners;
 
     public Player player;
+    public int lastWave;
 
 
     
@@ -66,10 +67,11 @@ public class WaveManager : MonoBehaviour
         spawnerCounter--;
         if(spawnerCounter <= 0)
         {
-            WaveEndEvent();
-            wavesCompleted++;
 
-            if(wavesCompleted >= waves.Count)
+            wavesCompleted++;
+            WaveEndEvent();
+
+            if (wavesCompleted >= waves.Count)
             {
                 EndGame();
             }

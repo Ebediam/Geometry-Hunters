@@ -6,8 +6,12 @@ public class Freeze : BulletEffect
 {
     public override void OnActivation(Enemy enemy)
     {
-        base.OnActivation(enemy);
-        enemy.speed = 0f;
+        if (isActive)
+        {
+            base.OnActivation(enemy);
+            enemy.speed = 0f;
+        }
+
         
     }
 

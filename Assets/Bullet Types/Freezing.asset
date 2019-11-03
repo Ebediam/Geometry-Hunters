@@ -16,7 +16,9 @@ MonoBehaviour:
   damage: 0
   color: {r: 0, g: 0.681592, b: 1, a: 0}
   trailColor: {r: 0, g: 0.9999995, b: 1, a: 0}
-  cooldown: 5
+  cooldown: 4
+  bulletEffects:
+  - {fileID: 0}
   speed: 10
   shotDelay: 0
   shotSFX: {fileID: 8300000, guid: 794aaa9a007fba24c9505021d228b7ac, type: 3}

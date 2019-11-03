@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d85b46e3f941c64cbacb9be93ba2e0b, type: 3}
+  m_Name: Hard 3
+  m_EditorClassIdentifier: 
+  spawnerID: 
+  availableEnemies:
+  - {fileID: 11400000, guid: b1c6c43ac07924e48b2de7a2ff402030, type: 2}
+  - {fileID: 11400000, guid: 344cf36e3959ff94792513587eb77707, type: 2}
+  - {fileID: 11400000, guid: 0b83092f28a121445b20ccfdf792ce2f, type: 2}
+  enemyChance:
+  - 0.89
+  - 0.1
+  - 0.01
+  spawnNumber: 20
+  delayBetweenEnemies: 1
+  delayRange: 0.2

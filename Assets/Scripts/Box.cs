@@ -20,11 +20,13 @@ public class Box : MonoBehaviour
 
     public TextMeshPro goldText;
     public int price;
+    public int originalPrice;
 
 
     // Start is called before the first frame update
     public void Start()
     {
+        originalPrice = price;
         waveManager.WaveEndEvent += ReactivateBox;
         waveManager.WaveStartEvent += DeactivateBox;
         myBlock.OnCollisionEvent += BoxShot;
@@ -48,10 +50,16 @@ public class Box : MonoBehaviour
         Invoke("DelayedReactivateBox", delayToReactivate);
     }
 
-    public void DelayedReactivateBox()
+    public virtual void DelayedReactivateBox()
     {
+
         gameObject.SetActive(true);
         goldText.text = price.ToString() + " gold";
+        if (player.isDead)
+        {
+            price = originalPrice;
+            gameObject.SetActive(false);
+        }
     }
 
 }

@@ -18,5 +18,6 @@ MonoBehaviour:
   damage: 100
   goldValue: 100
   speed: 1.2
+  isBoss: 1
   initialColor: {r: 0.93412864, g: 1, b: 0, a: 1}
   endColor: {r: 0.8396226, g: 0, b: 0.0882809, a: 1}

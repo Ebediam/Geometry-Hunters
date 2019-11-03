@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="Bullet Effect")]
 public class BulletEffect : MonoBehaviour
 {
+
+    public bool isActive;
     public virtual void OnActivation(Enemy enemy)
     {
-
+        if (!isActive)
+        {
+            return;
+        }
     }
 
 

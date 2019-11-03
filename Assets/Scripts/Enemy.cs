@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public int hitPoints;
     public EnemyType enemyType;
+    public bool isBoss;
 
     public AudioSource deathSFX;
 
@@ -43,6 +44,7 @@ public class Enemy : MonoBehaviour
         hitPoints = enemyType.health;
         goldValue = enemyType.goldValue;
 
+        isBoss = enemyType.isBoss;
         transform.localScale *= enemyType.size;
         rb.mass *= enemyType.size;
         damage = enemyType.damage;
@@ -69,14 +71,18 @@ public class Enemy : MonoBehaviour
         {
             Bullet bullet = collision.collider.gameObject.GetComponentInChildren<Bullet>();
             remainingHitPoints -= bullet.damage;
-            
-            if(bullet.bulletType.bulletEffects.Count > 0)
+
+            if (!isBoss)
             {
-                foreach (BulletEffect effect in bullet.bulletType.bulletEffects)
+                if (bullet.bulletEffects.Count > 0)
                 {
-                    effect.OnActivation(this);
+                    foreach (BulletEffect effect in bullet.bulletEffects)
+                    {
+                        effect.OnActivation(this);
+                    }
                 }
             }
+            
 
 
             mat.SetFloat("_healthRemaining", (remainingHitPoints + 0f) / hitPoints);

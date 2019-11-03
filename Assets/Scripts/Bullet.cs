@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     public MeshRenderer mesh;
     public BulletType bulletType;
     public Rigidbody rb;
+    public List<BulletEffect> bulletEffects;
 
     // Start is called before the first frame update
     void Start()

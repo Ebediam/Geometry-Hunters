@@ -19,10 +19,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b1c6c43ac07924e48b2de7a2ff402030, type: 2}
   - {fileID: 11400000, guid: 0b83092f28a121445b20ccfdf792ce2f, type: 2}
   enemyChance:
-  - 0.1
-  - 0.3
+  - 0.15
+  - 0.25
   - 0.59
   - 0.01
   spawnNumber: 20
-  delayBetweenEnemies: 0.95
+  delayBetweenEnemies: 1.25
   delayRange: 0.2
